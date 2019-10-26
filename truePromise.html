@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const posts = [{
+            "title": "t12345",
+            "body": "b4567"
+        }, {
+            "title": "t67890",
+            "body": "b6789"
+        }];
+        //增加数据
+        function createPost(post) {
+            return new Promise(function(resolve, reject) {
+                setTimeout(function() {
+                    posts.push(post);
+                    let err = false;
+                    if (!err) {
+                        resolve();
+                    } else {
+                        reject('error');
+                    }
+                }, 2000);
+            });
+        }
+        //循环文章列表
+        function getPost() {
+            setTimeout(function() {
+                let output = '';
+                posts.forEach(function(post) {
+                    output += `<li>${post.title}</li>`;
+                })
+                document.body.innerHTML = output
+            }, 1000)
+        }
+
+        let newPost = {
+            "title": "2345678",
+            "body": "tyui"
+        }
+        createPost(newPost)
+            .then(getPost)
+            .catch(function(err) {
+                console.log(err)
+            })
+    </script>
+</body>
+
+</html>

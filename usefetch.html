@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function() {
+            var oBtn = document.getElementById('btn');
+            var oDiv = document.getElementById('div1');
+            oBtn.onclick = function() {
+                fetch('data.txt')
+                    .then(res => res.text())
+                    .then(data => oDiv.innerHTML = data)
+                    .catch(err => err)
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <input type="button" value="get txt" id="btn">
+    <div id="div1">wait server data</div>
+</body>
+
+</html>

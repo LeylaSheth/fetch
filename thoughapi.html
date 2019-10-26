@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="number" name="" id="num1">
+    <input type="button" id="btn" value="get api data">
+    <ul id="ul1">
+
+    </ul>
+    <script>
+        window.onload = function() {
+            let oBtn = document.getElementById('btn');
+            let oNum = document.getElementById('num1');
+            let oUl = document.getElementById('ul1');
+            oBtn.onclick = function() {
+                //1.创建XMLHttpRequest
+                const xhr = new XMLHttpRequest();
+                let number = oNum.value;
+                //2.建立连接
+                xhr.open('GET', `http://api.icndb.com/jokes/random/${number}`, true)
+                    //3.发送，数据请求
+                xhr.send();
+                //4.返回数据
+                xhr.onload = function() {
+                    if (this.status === 200) {
+                        //console.log(JSON.parse(this.responseText));
+                        var arr = JSON.parse(this.responseText).value;
+                        console.log(arr.length);
+                        for (let i = 0; i < arr.length; i++) {
+                            let oLi = document.createElement('li');
+                            oLi.innerHTML = arr[i].joke;
+                            oUl.appendChild(oLi);
+                        }
+                    }
+                    xhr.onerror = function() {
+                        console.log('error');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

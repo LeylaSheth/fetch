@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function() {
+            var oBtn = document.getElementById('btn');
+            var oDiv = document.getElementById('div1');
+            oBtn.onclick = function() {
+                fetch('http://jsonplaceholder.typicode.com/posts')
+                    .then(function(res) {
+                        console.log(res.body);
+                        return (res.json()); //是一个promise对象
+                    })
+                    .then(function(json) {
+                        console.log(json);
+                        oDiv.innerHTML = json;
+                    })
+                    .catch(function(err) {
+                        console.log(err);
+                    })
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <input type="button" value="get json" id="btn">
+    <div id="div1">wait server data</div>
+</body>
+
+</html>
